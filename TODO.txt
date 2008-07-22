@@ -1,0 +1,11 @@
+1. Pages and elements should be objects after all, so we can have direct permissions
+   checks on them (restrict an entire page to admins, restrict portal elements to admin).
+
+   Right now check is "if you are priv 'x' on the portal then you can see a priv 'x' portlet".
+   If a portal element was an object, the portlet init code could set perms on the element
+   as it wishes (say, inheriting privs from the package it works with, not the parent
+   portal object).
+
+2. Improve add portlet to portal administration by expanding the portal datasource to
+   include an optional procedure that guides the admin page (a bit like applets in
+   dotlrn).

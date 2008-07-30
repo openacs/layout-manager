@@ -8,6 +8,5 @@
 \i themes-drop.sql
 \i page-templates-drop.sql
 \i includelets-drop.sql
-\i datasources-drop.sql
 
 drop sequence layout_seq;

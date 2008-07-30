@@ -28,7 +28,6 @@ ad_proc layout_manager::install::after_install {} {
         layout::page_template::new \
             -name 3_column\
             -columns 3 \
-            -description "Three columns" \
             -description #layout-manager.simple_3column_layout_description# \
             -template /packages/layout-manager/lib/page-templates/simple 
     
@@ -55,34 +54,5 @@ ad_proc layout_manager::install::after_install {} {
             -name blank \
             -description "No Graphics" \
             -template /packages/layout-manager/lib/themes/blank
-    
-        # Now define a couple of datasource apps and includelets
-    
-        layout::datasource::new \
-            -name layout_manager_includelets \
-            -description "Layout Manager Includelets" \
-            -package_key layout-manager \
-            -constructor layout::datasource::constructor::closest_ancestor
-    
-        layout::includelet::new \
-            -name layout_manager_admin_includelet \
-            -description "Layout Manager Administration" \
-            -title "Layout Manager Administration" \
-            -datasource layout_manager_includelets \
-            -template /packages/layout-manager/lib/layout-manager-admin-includelet \
-            -required_privilege admin
-    
-        layout::datasource::new \
-            -name subsite_includelets \
-            -description "Subsite Includelets" \
-            -package_key acs-subsite \
-            -constructor layout::datasource::constructor::closest_ancestor
-    
-        layout::includelet::new \
-            -name subsites_includelet \
-            -description "Display Subsites" \
-            -title "Subsites" \
-            -datasource subsite_includelets \
-            -template /packages/acs-subsite/lib/subsites
     }
 }

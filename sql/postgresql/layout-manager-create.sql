@@ -7,7 +7,6 @@
 
 create sequence layout_seq;
 
-\i datasources-create.sql
 \i includelets-create.sql
 \i page-templates-create.sql
 \i themes-create.sql

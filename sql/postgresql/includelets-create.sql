@@ -10,27 +10,26 @@ create table layout_includelets (
                                     constraint l_includelets_name_pk
                                     primary key,
     title                           text default null,
+    description                     text,
     template                        text
                                     constraint l_includelets_template_nn
                                     not null,
     dotlrn_compat_p                 boolean
                                     constraint l_includelets_d_c_p_nn
                                     not null,
-    constructor                     text,
-    destructor                      text,
-    description                     text,
+    initializer                     text,
     required_privilege              text default 'read',
-    datasource                      text
-                                    constraint l_includelets_ds_fk
-                                    references layout_datasources(name)
+    application                     text
+                                    constraint l_includelets_app_fk
+                                    references apm_package_types(package_key)
                                     on delete cascade
-                                    constraint l_includelets_ds_nn
+                                    constraint l_includelets_pp_nn
                                     not null
 );
 
 -- indexes for referential integrity checking
 
-create index l_includelets_datasource_idx on layout_includelets(datasource);
+create index l_includelets_application_idx on layout_includelets(application);
 
 comment on table layout_includelets is '
     A layout includelet is the package of code that generates the content of a layout
@@ -51,14 +50,13 @@ comment on column layout_includelets.title is '
     user portlet and one admin portlet.
 ';
 
-comment on column layout_includelets.datasource is '
-    The package key of the datasource that this includelet works with.  For instance the
-    forums layout includelet works with the forums package.
+comment on column layout_includelets.application is '
+    The package key of the application that this includelet works with.  For instance the
+    forums includelet works with the forums package.
 ';
 
 comment on column layout_includelets.template is '
-    The name of template that displays the layout includelet content.  Note this is not a full
-    path, layout templates go in the standard package template library directory.
+    The name of template that displays the layout includelet content.
 ';
 
 comment on column layout_includelets.dotlrn_compat_p is '
@@ -66,10 +64,6 @@ comment on column layout_includelets.dotlrn_compat_p is '
     directly.
 ';
 
-comment on column layout_includelets.constructor is '
-    The name of an optional constructor to run after the default constructor.
-';
-
-comment on column layout_includelets.destructor is '
-    The name of an optional constructor to run after the default destructor.
+comment on column layout_includelets.initializer is '
+    The name of an optional initialization procedure to run after the default constructor.
 ';

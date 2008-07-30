@@ -13,12 +13,11 @@ namespace eval layout::includelet {}
 ad_proc layout::includelet::new {
     -name:required
     -title:required
-    -datasource:required
+    -application:required
     -template:required
     -description
     {-dotlrn_compat_p f}
-    {-constructor ""}
-    {-destructor ""}
+    {-initializer ""}
     {-required_privilege read}
 } {
     Create a new layout manager includelet.

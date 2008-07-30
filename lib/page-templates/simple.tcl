@@ -10,7 +10,9 @@ ad_page_contract {
     element_list:onevalue
 }
 
-set column_count [layout::page_template::get_column_value -name $page(page_template) -column columns]
+set column_count [layout::page_template::get_column_value \
+                     -name $page(page_template) \
+                     -column columns]
 
 # The page(element_list) array only contains data for elements actually placed on
 # the page.  We initialize the array elements of the regions array to the empty list

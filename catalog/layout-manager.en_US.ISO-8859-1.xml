@@ -1,10 +1,6 @@
 <?xml version="1.0"?>
 <message_catalog package_key="layout-manager" package_version="1.0" locale="en_US" charset="ISO-8859-1">
 
-  <msg key="plain">Portal Plain</msg>
-  <msg key="tabbed">Portal Tabbed</msg>
-  <msg key="nested_tabbed">Portal Nested Tabbed</msg>
-
   <msg key="simple_1column_layout_description">One columns</msg>
   <msg key="simple_2column_layout_description">Two columns</msg>
   <msg key="simple_3column_layout_description">Three columns</msg>

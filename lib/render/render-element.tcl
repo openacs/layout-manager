@@ -8,8 +8,6 @@ ad_page_contract {
 
 }
 
-array set element [layout::element::get_render_data \
-                      -element_id $element_id \
-                      -edit_p $edit_p]
+array set element [layout::element::get_render_data -element_id $element_id]
 
 set config $element(config)

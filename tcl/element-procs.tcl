@@ -34,7 +34,7 @@ ad_proc layout::element::new {
     @param includelet_name The layout manager includelet name
     @param name The name of the element
     @param parameters Optional args to set in array get format
-    @param initialize If set, call the layout manager's default constructor
+    @param initialize If set, call the layout manager's default initializer
     @param theme Override page and pageset theme if set
 
     @return The element_id of the new portlet
@@ -70,8 +70,8 @@ ad_proc layout::element::new {
         -element_id $element_id \
         -parameters $parameters
 
-    if { $initialize_p && $includelet(constructor) ne "" } {
-        $includelet(constructor) $element_id
+    if { $initialize_p && $includelet(initializer) ne "" } {
+        $includelet(initializer) $element_id
     }
 
     layout::page::flush -page_id $page_id
@@ -326,13 +326,11 @@ ad_proc layout::element::choose_page_column {
 
 ad_proc -private layout::element::get_render_data {
     -element_id:required
-    {-edit_p 0}
 } {
     Return all the good stuff a render template needs to render an element.
 
     @element_id The element in question
     @decorate_p If true decorate the element with the layout manager theme.
-    @edit_p If true the render template should show the shade and hide widgets
 
 } {
 

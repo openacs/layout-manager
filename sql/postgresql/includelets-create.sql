@@ -24,6 +24,9 @@ create table layout_includelets (
                                     references apm_package_types(package_key)
                                     on delete cascade
                                     constraint l_includelets_pp_nn
+                                    not null,
+    internally_managed_p            boolean
+                                    constraint l_includelets_i_m_nn
                                     not null
 );
 
@@ -66,4 +69,12 @@ comment on column layout_includelets.dotlrn_compat_p is '
 
 comment on column layout_includelets.initializer is '
     The name of an optional initialization procedure to run after the default constructor.
+';
+
+comment on column layout_includelets.internally_managed_p is '
+    If true, external application/includelet managers (like layout-subsite-integration) should
+    ignore the existence of this includelet.  While this was added explicitly to port the
+    rather quaint and eccentric xowiki portlet to the layout manager, which has its admin
+    portlet create layout elements via a dynamically generated form in a very non-.LRN
+    manner, it''s probably generally useful.
 ';

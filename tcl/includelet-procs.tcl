@@ -19,6 +19,7 @@ ad_proc layout::includelet::new {
     {-dotlrn_compat_p f}
     {-initializer ""}
     {-required_privilege read}
+    {-internally_managed_p f}
 } {
     Create a new layout manager includelet.
 
@@ -34,6 +35,8 @@ ad_proc layout::includelet::new {
     @param destructor Custom destructor to run before the default destructor
     @param required_privilege The default privilege the user needs to be able to see this
         includelet (defaults to 'read')
+    @param internally_managed_p Controls whether or not application/includelet managers
+           should touch this includelet.
 
     @author Don Baccus (dhogaza@pacifier.com)
 } {

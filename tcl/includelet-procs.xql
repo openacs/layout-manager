@@ -6,10 +6,10 @@
     <querytext>
       insert into layout_includelets
         (name, title, application, template, initializer, required_privilege,
-         description, dotlrn_compat_p)
+         description, dotlrn_compat_p, internally_managed_p)
       values
         (:name, :title, :application, :template, :initializer, :required_privilege,
-         :description, :dotlrn_compat_p)
+         :description, :dotlrn_compat_p, :internally_managed_p)
     </querytext>
   </fullquery>
 

@@ -10,34 +10,33 @@ create table layout_includelets (
                                     constraint l_includelets_name_pk
                                     primary key,
     title                           varchar(100) default null,
+    description                     varchar(1000),
+    template                        varchar(100)
+                                    constraint l_includelets_template_nn
+                                    not null,
+    dotlrn_compat_p                 char(1)
+                                    constraint layout_includelets_d_c_p_nn
+                                    not null
+                                    constraint layout_includelets_d_c_p_ck
+                                    check (dotlrn_compat_p in ('t', 'f')),
+    initializer                     varchar(100),
+    required_privilege              varchar(20) default 'read',
     application                     varchar(100)
                                     constraint l_includelets_application_fk
                                     references apm_package_types (package_key)
                                     on delete cascade
                                     constraint l_includelets_app_nn
                                     not null,
-    owner                           varchar(100)
-                                    constraint l_includelets_owner_fk
-                                    references apm_package_types (package_key)
-                                    on delete cascade
-                                    constraint l_includelets_owner_nn
-                                    not null,
-    template                        varchar(100)
-                                    constraint l_includelets_template_nn
-                                    not null,
-    dotlrn_compat_p                 char(1) not null
-                                    constraint layout_includelets_d_c_p_ck
-                                    check (dotlrn_compat_p in ('t', 'f')),
-    constructor                     varchar(100),
-    destructor                      varchar(100),
-    description                     varchar(1000),
-    required_privilege              varchar(20) default 'read'
+    internally_managed_p            char(1)
+                                    constraint layout_includelets_i_m_p_nn
+                                    not null
+                                    constraint layout_includelets_i_m_p_ck
+                                    check (internally_managed_p in ('t', 'f'))
 );
 
 -- indexes for referential integrity checking
 
 create index l_includelets_application_idx on layout_includelets(application);
-create index l_includelets_owner_idx on layout_includelets(owner);
 
 comment on table layout_includelets is '
     A layout includelet is the package of code that generates the content of a layout
@@ -63,10 +62,6 @@ comment on column layout_includelets.application is '
     forums layout includelet works with the forums package.
 ';
 
-comment on column layout_includelets.owner is '
-    The package key of the package that implements this includelet.
-';
-
 comment on column layout_includelets.template is '
     The name of template that displays the layout includelet content.  Note this is not a full
     path, layout templates go in the standard package template library directory.
@@ -77,10 +72,14 @@ comment on column layout_includelets.dotlrn_compat_p is '
     directly.
 ';
 
-comment on column layout_includelets.constructor is '
-    The name of an optional constructor to run after the default constructor.
+comment on column layout_includelets.initializer is '
+    The name of an optional initialization procedure to run after the default constructor.
 ';
 
-comment on column layout_includelets.destructor is '
-    The name of an optional constructor to run after the default destructor.
+comment on column layout_includelets.internally_managed_p is '
+    If true, external application/includelet managers (like layout-subsite-integration) should
+    ignore the existence of this includelet.  While this was added explicitly to port the
+    rather quaint and eccentric xowiki portlet to the layout manager, which has its admin
+    portlet create layout elements via a dynamically generated form in a very non-.LRN
+    manner, it''s probably generally useful.
 ';

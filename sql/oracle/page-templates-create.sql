@@ -28,5 +28,5 @@ comment on table layout_page_templates is '
 ';
 
 comment on column layout_page_templates.template is '
-    The path relative to layout/lib to the page template.
+    The path to the page template.
 ';

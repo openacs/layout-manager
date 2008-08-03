@@ -17,5 +17,5 @@ comment on table layout_themes is '
 ';
 
 comment on column layout_themes.template is '
-    The path relative to the lib directory to the theme template
+    The path to the the theme template
 ';

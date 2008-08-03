@@ -25,6 +25,12 @@ create table layout_elements (
                                     on delete cascade
                                     constraint l_elements_page_id_nn
                                     not null,
+    package_id                      integer
+                                    constraint l_elements_package_Id_fk
+                                    references apm_packages (package_id)
+                                    on delete cascade
+                                    constraint l_elements_package_Id_nn
+                                    not null,
     page_column                     integer
                                     constraint l_elements_column_nn
                                     not null,

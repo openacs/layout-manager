@@ -6,7 +6,8 @@ as
        	p_package_id                in apm_packages.package_id%TYPE,
         p_name                      in layout_pagesets.name%TYPE default 'Untitled',
         p_theme                     in layout_pagesets.theme%TYPE default null,
-        p_template_id               in layout_pagesets.template_id%TYPE default null
+        p_template_id               in layout_pagesets.template_id%TYPE default null,
+        p_context_id                in acs_objects.context_id%TYPE
     ) return layout_pagesets.pageset_id%TYPE;
 
     procedure del (
@@ -34,7 +35,7 @@ as
 
         v_pageset_id := acs_object.new(
             object_type => 'layout_pageset',
-            context_type => p_context_id
+            context_id => p_context_id
         );
 
         insert into layout_pagesets

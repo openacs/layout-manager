@@ -23,10 +23,10 @@ create table layout_includelets (
                                     constraint l_includelets_app_fk
                                     references apm_package_types(package_key)
                                     on delete cascade
-                                    constraint l_includelets_pp_nn
+                                    constraint l_includelets_app_nn
                                     not null,
     internally_managed_p            boolean
-                                    constraint l_includelets_i_m_nn
+                                    constraint l_includelets_i_m_p_nn
                                     not null
 );
 

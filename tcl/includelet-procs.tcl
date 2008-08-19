@@ -68,3 +68,17 @@ ad_proc layout::includelet::get {
     db_1row select_includelet {} -column_array includelet
     return [array get includelet]
 }
+
+ad_proc layout::includelet::get_column_value {
+    -name:required
+    -column:required
+} {
+    Return one row column from a layout includelet.
+
+    @param name The name of the includelet.
+    @param column The name of the column in the layout_elements table.
+} {
+    array set includelet [layout::includelet::get -name $name]
+    return $includelet($column)
+}
+

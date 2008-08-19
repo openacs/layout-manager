@@ -86,7 +86,16 @@ ad_proc layout::element::delete {
 
     @param element_id The id of the parameter to be deleted.
 } {
-    set page_id [layout::element::get_column_value -element_id $element_id -column page_id]
+    array set element [layout::element::get -element_id $element_id]
+    set page_id $element(page_id)
+
+    set uninitializer [layout::includelet::get_column_value \
+                          -name $element(includelet_name) \
+                          -column uninitializer]
+    if { $uninitializer ne "" } {
+        $uninitializer $element_id
+    }
+
     db_dml delete_element {}
     layout::element::flush -element_id $element_id
     layout::page::flush -page_id $page_id

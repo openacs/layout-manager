@@ -5,10 +5,10 @@
   <fullquery name="layout::includelet::new.insert_includelet">
     <querytext>
       insert into layout_includelets
-        (name, title, application, template, initializer, required_privilege,
+        (name, title, application, template, initializer, uninitializer, required_privilege,
          description, dotlrn_compat_p, internally_managed_p)
       values
-        (:name, :title, :application, :template, :initializer, :required_privilege,
+        (:name, :title, :application, :template, :initializer, :uninitializer, :required_privilege,
          :description, :dotlrn_compat_p, :internally_managed_p)
     </querytext>
   </fullquery>

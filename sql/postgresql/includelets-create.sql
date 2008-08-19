@@ -18,6 +18,7 @@ create table layout_includelets (
                                     constraint l_includelets_d_c_p_nn
                                     not null,
     initializer                     text,
+    uninitializer                   text,
     required_privilege              text default 'read',
     application                     text
                                     constraint l_includelets_app_fk
@@ -68,7 +69,11 @@ comment on column layout_includelets.dotlrn_compat_p is '
 ';
 
 comment on column layout_includelets.initializer is '
-    The name of an optional initialization procedure to run after the default constructor.
+    The name of an optional initialization procedure to run when an element is created.
+';
+
+comment on column layout_includelets.uninitializer is '
+    The name of an optional uninitialization procedure to run when an element is deleted.
 ';
 
 comment on column layout_includelets.internally_managed_p is '

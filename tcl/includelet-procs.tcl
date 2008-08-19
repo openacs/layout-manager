@@ -18,6 +18,7 @@ ad_proc layout::includelet::new {
     -description
     {-dotlrn_compat_p f}
     {-initializer ""}
+    {-uninitializer ""}
     {-required_privilege read}
     {-internally_managed_p f}
 } {

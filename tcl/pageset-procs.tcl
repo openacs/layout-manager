@@ -135,12 +135,7 @@ ad_proc layout::pageset::get_user_pageset_id {
 
     if { $pageset_id == 0 } {
         if { ![layout::pageset::initialized -package_id $package_id] } {
-            if { [permission::permission_p -object_id $package_id -privilege admin] } {
-                ad_returnredirect admin
-                ad_script_abort
-            } else {
-                ad_return_exception_template -params {{custom_message "The page set package hasn't been configured yet."}} /packages/acs-subsite/www/shared/report-error
-            }
+            return ""
         }
 
         # At this point we know we're supposed to create a personal page set

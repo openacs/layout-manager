@@ -21,6 +21,7 @@ ad_proc layout::includelet::new {
     {-uninitializer ""}
     {-required_privilege read}
     {-internally_managed_p f}
+    {-singleton_p t}
 } {
     Create a new layout manager includelet.
 

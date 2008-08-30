@@ -26,6 +26,34 @@
         </querytext>
     </fullquery>
 
+    <fullquery name="layout::element::copy.copy_element">
+        <querytext>
+          insert into layout_elements
+            (element_id, includelet_name, name, title, page_id, page_column, theme,
+             state, sort_key, required_privilege, package_id)
+            select :new_element_id, includelet_name, name, title, :page_id, :page_column,
+                   theme, :state,
+                   coalesce((select max(layout_elements.sort_key) + 1
+                        from layout_elements
+                        where page_id = :page_id
+                        and page_column = :page_column), 1),
+                   required_privilege,
+                   package_id
+            from layout_elements
+            where element_id = :element_id
+        </querytext>
+    </fullquery>
+
+    <fullquery name="layout::element::copy.copy_element_parameters">
+        <querytext>
+          insert into layout_element_parameters
+            (element_id, key, value)
+          select :new_element_id, key, value
+          from layout_element_parameters
+          where element_id = :element_id
+        </querytext>
+    </fullquery>
+
     <fullquery name="layout::element::delete.delete_element">
         <querytext>
             delete

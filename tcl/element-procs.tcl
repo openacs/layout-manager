@@ -46,7 +46,7 @@ ad_proc layout::element::new {
 
     set page_id [layout::page::get_id -pageset_id $pageset_id -page_name $page_name]
 
-    if {[string equal "" $page_column]} {
+    if { $page_column eq "" } {
             set page_column [layout::element::choose_page_column -page_id $page_id]
     }
 
@@ -388,6 +388,35 @@ ad_proc -private layout::element::get_render_data {
 
     return [array get element]
 
+}
+
+ad_proc layout::element::copy {
+    -element_id:required
+    {-page_name ""}
+    {-page_column ""}
+    {-state full}
+} {
+    Make a copy of an existing element, including its parameters.
+
+    @param element_id The existing element to copy from.
+    @param page_name The name of the page to place the copy on.
+    @param page_column The column in which to place the copy.
+    @return The element_id of the new copy of the element.
+} {
+    set page_id [layout::element::get_column_value -element_id $element_id -column page_id]
+
+    if { $page_column eq "" } {
+            set page_column [layout::element::choose_page_column -page_id $page_id]
+    }
+
+    set new_element_id [db_nextval layout_seq]
+
+    db_transaction {
+        db_dml copy_element {}
+        db_dml copy_element_parameters {}
+    }
+
+    return $new_element_id
 }
 
 ad_proc layout::element::configure {

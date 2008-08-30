@@ -32,7 +32,13 @@ create table layout_includelets (
                                     constraint layout_includelets_i_m_p_nn
                                     not null
                                     constraint layout_includelets_i_m_p_ck
-                                    check (internally_managed_p in ('t', 'f'))
+                                    check (internally_managed_p in ('t', 'f')),
+    singleton_p                     char(1)
+                                    default 't'
+                                    constraint layout_includelets_s_p_nn
+                                    not null
+                                    constraint layout_includelets_s_p_ck
+                                    check (singleton_p in ('t', 'f'))
 );
 
 -- indexes for referential integrity checking
@@ -87,4 +93,8 @@ comment on column layout_includelets.internally_managed_p is '
     rather quaint and eccentric xowiki portlet to the layout manager, which has its admin
     portlet create layout elements via a dynamically generated form in a very non-.LRN
     manner, it''s probably generally useful.
+';
+
+comment on column layout_includelets.singleton_p is '
+    If true, only one instance of this includelet should be instantiated.
 ';

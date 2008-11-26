@@ -9,14 +9,15 @@ and derived from the earlier <i>Theme Zen</i> package released with .LRN.
 <blockquote><pre>
 layout::page_template::new \
     -name 1_column \
-    -description #layout-manager.simple_1column_layout_description# \
+    -description "#layout-manager.simple_1column_layout_description#" \
     -columns 1 \
     -template /packages/layout-manager/lib/page-templates/simple
 </pre></blockquote>
 The "name" parameter must be unique across the system and is used internally as the
 page template's primary key.
 <p>
-The "description" parameter is the text displayed to the user when they choose a format for a page.
+The "description" parameter, preferably localized, is the text displayed to the user when
+they choose a format for a page.
 <p>
 The "columns" parameter declares the number of columns this template expects.  The layout manager ensures that the number of columns built for a page is less than or equal to this parameter (it will be less if there are fewer elements than columns placed on a page).
 <p>

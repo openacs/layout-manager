@@ -24,8 +24,8 @@ layout::theme::new \
 The "name" parameter is used internally and must be unique through out the system, as it is
 used as the primary key for themes.
 <p>
-The "description" parameter is displayed to the user in select widgets used to assign a theme
-to a pageset, page or element.
+The "description" parameter, preferably localized, is displayed to the user in select
+widgets used to assign a theme to a pageset, page or element.
 <p>
 The "template" parameter points to the master template, which typically renders the element title and content, such as is done by the <i>standard</i> theme template:
 <blockquote><pre>

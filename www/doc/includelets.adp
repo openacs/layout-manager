@@ -5,16 +5,16 @@ It's an easy, two- or three-step process!
 <ol>
   <li>Write a template which implements the functionality you want to declare as an
       <i>includelet</i> (or find a template within a package that already does what you
-      want).  Implement it, if necessary.
+      want).
   <li>If your <i>Includelet</i> requires parameters other than the package instance it
       will be bound to, write an initialization procedure to generate the necessary
       values, and store them in the <i>element</i> the <i>Layout Manager</i> will
-      associate when the <i>includelet</i> is added to a <i>pageset</i>.
+      create when the <i>includelet</i> is added to a <i>pageset</i>.
   <li>Call the <i>layout manager</i> Tcl API to declare your includelet.
 </ol>
 If a template already exists that does what you want, and requires no parameters other
-than its associated package, only the last step is necessary.  For instance, here's the
-Tcl API call that creates the <i>Subsites</i> includelet, which just calls the same
+than perhaps its associated package, only the last step is necessary.  For instance, here's
+the Tcl API call that creates the <i>Subsites</i> includelet, which just calls the same
 subsite-listing template included by the standard acs-subsite index page:
 <blockquote><pre>
 layout::includelet::new \
@@ -28,11 +28,11 @@ layout::includelet::new \
 The "name" parameter is the internal name and primary key of the includelet, and must be unique
 throughout the system.
 <p>
-The "description" parameter should be a human-readable description of what the includelet
-does.
+The "description" parameter should be a human-readable description, preferably localized,
+of what the includelet does.
 <p>
-The "title" parameter provides a default title to use when creating an element from
-the includelet.
+The "title" parameter provides a default title, preferably localized,  to use when creating
+an element from the includelet.
 <p>
 The "application" parameter is the package key that this includelet supports.  When an element
 is created from this includelet, it will be bound to a single instance of this apm package

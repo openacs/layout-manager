@@ -9,12 +9,17 @@
 for Oracle and PostgreSQL.
 <li>Defining a portlet requires the writing of dozens of lines of custom Tcl code to implement
 a fairly complex service contract.  Among other things, the portal has to "know" how to
-add itself to a new-portal page and to remove itself as well.  The new-portal package itself provides very limited management help.
-<li>Likewise, in order to add an application which supports portlets, one must implement a .LRN applet or similar functionality.  new-portal provides no configuration help.
+add itself to a new-portal page and to remove itself as well.  The new-portal package itself
+provides very limited management help.
+<li>Likewise, in order to add an application which supports portlets, one must implement a .LRN
+applet or similar functionality.  new-portal provides no configuration help.
 <li>Portlets are called with parameters passed in an array.  It's impossible to wrap an existing
 template with a portlet definition and run it unchanged (i.e. share it with existing code)
 without providing an intermediate interface template.
-<li>There's a lot of magic HTML generated within the new-portal package's Tcl library.
+<li>There's a lot of dynamic HTML generated within the new-portal package's Tcl library.  Besides
+making it more difficult to customize the output, the template engine is unable to cache the
+compiled byte-code generated for dynamic HTML, which impacts efficiency.
+<li>Theming is only available for portals, not pages or elements.
 </ul>
 By comparison, the <b>Layout Manager</b> package:
 <ul>
@@ -22,18 +27,17 @@ By comparison, the <b>Layout Manager</b> package:
 implementation is required.  An <i>includelet</i> may provide an optional <i>initializer</i>
 procedure, for instance to create a private calendar for a user if desired, etc.
 <li>Parameters are defined directly, by name, when an includelet's template is rendered,
-just as is true when they're passed using the template system's <i>&lt;include&gt;</i> tag.
+just as is typically true when they're passed using the template system's
+<i>&lt;include&gt;</i> tag.
 <li>All rendering is done through use of <i>&lt;include&gt;</i> tags, and a simple Tcl API is
 provided to allow the addition of custom page templates (which define page layout), themes,
-etc.
-<li>The <i>Layout Manager</i> is a service, and is not meant to be mounted, so provides no
-User Interface for the customization of page layout, etc.  However, there is a library of
-templates which are designed to be included (see the <i>Layout Subsite Integration</i> package
-for an example of how to use these).
-<li>Though the <i>Layout Manager</i> itself provides no assistance in the managing of
-applications and their associated includelets, the <i>Layout Subsite Integration</i> package
-provides a very flexible admin interface that can be used to build a subsite interactively,
-with no programming required.  Alternatively, the <b>install.xml</b> facility, or a script
-accesing the <i>Layout Manager</i> Tcl API directly, can be used for site building.
-<li>All rendering operations are heavily cached, so performance should be much better than
-new-portal's (queries required for page and navigation tab rendering are all cached).
+etc.  The template engine is able to cache the resulting compiled byte-code, for increased
+performance.
+<li>The <i>Layout Manager</i> is a service, and is not meant to be mounted.  However,
+a library of templates and page configuration scripts are provided, which can easily be
+integrated into an application through use of the new "extends package" facility built
+into ACS Core versions starting with 5.5.0.  See the <i>Layout Managed Subsite</i> package
+for an example.
+<li>Commonly used database queries and associated computations are cached, so performance
+should be better than new-portal's.
+<li>Theming can be applied to a set of pages, or individual pages and elements.

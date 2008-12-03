@@ -21,7 +21,9 @@ if { $pageset_id eq "" } {
         ad_returnredirect [site_node::get_url_from_object_id -object_id $package_id]admin/layouts
         ad_script_abort
     } else {
-        ad_return_exception_template -params {{custom_message "The page set package hasn't been configured yet."}} /packages/acs-subsite/www/shared/report-error
+        ad_return_exception_template \
+            -params {{custom_message "[_ layout-manager.uninitialized]"}} \
+            /packages/acs-subsite/www/shared/report-error
     }
 }
 

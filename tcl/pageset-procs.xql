@@ -19,6 +19,15 @@
     </querytext>
   </fullquery>
 
+  <fullquery name="layout::pageset::get_pages.get_pages">
+    <querytext>
+      select page_id
+      from layout_pages
+      where pageset_id = :pageset_id
+      order by page_id
+    </querytext>
+  </fullquery>
+
   <fullquery name="layout::pageset::get.select_pageset_info">
     <querytext>
       select *

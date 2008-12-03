@@ -99,6 +99,11 @@ switch $op {
     }
 
     change_page_template {
+        layout::page::adjust_element_columns \
+            -page_id $page_id \
+            -columns [layout::page_template::get_column_value \
+                         -name $page_template \
+                         -column columns]
         layout::page::set_column_value \
             -page_id $page_id \
             -column page_template \

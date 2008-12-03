@@ -2,13 +2,13 @@
   <input type="hidden" name="return_url" value="@return_url@">
   <input type="hidden" name="pageset_id" value="@pageset_id@">
   <input type="hidden" name="op" value="change_theme">
-  <strong>Page Set Theme:</strong>
+  <strong>#layout-manager.pageset_theme#:</strong>
   <select name="theme">
     <multiple name="themes">
       <option value="@themes.name@" <if @current_theme@ eq @themes.name@> selected</if>>@themes.description@</option>
     </multiple>
   </select>
-  <input type=submit value="Update">
+  <input type=submit value="#layout-manager.Update#">
 </form>
 
 <if @hidden_elements:rowcount@ ne 0>
@@ -22,7 +22,7 @@
         <option value="@hidden_elements.element_id@">@hidden_elements.title@</option>
       </multiple>
     </select>
-    <input type="submit" value="Add Hidden Portlet">
+    <input type="submit" value="#layout-manager.add_hidden#">
   </form>
 </if>
 
@@ -35,7 +35,7 @@
 <form method=post action="@package_url@pageset-configure-2">
   <input type="hidden" name="return_url" value="@return_url@">
   <input type="hidden" name="pageset_id" value="@pageset_id@">
-  <b>Add a new page:</b>
+  <b>#layout-manager.add_page#:</b>
   <input type="text" name="name" value="Page @new_page_num@">
   <input type="hidden" name=op value="add_page">
   <input type="submit" value="Add Page">
@@ -45,8 +45,8 @@
   <form method=post action="@package_url@pageset-configure-2">
     <input type="hidden" name="return_url" value="@return_url@">
     <input type="hidden" name="pageset_id" value="@pageset_id@">
-    <b>Revert to the default arrangement:</b>
-    <input type=submit name=op value="Revert">
+    <b>#layout-manager.revert_layout#:</b>
+    <input type=submit name=op value="#layout-manager.Revert#">
   </form>
 </if>
 

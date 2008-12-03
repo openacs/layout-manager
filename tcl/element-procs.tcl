@@ -390,30 +390,38 @@ ad_proc -private layout::element::get_render_data {
 
 }
 
-ad_proc layout::element::copy {
+ad_proc layout::element::clone {
     -element_id:required
-    {-page_name ""}
+    {-name ""}
+    {-title ""}
+    {-theme ""}
+    {-required_privilege ""}
+    {-page_id ""}
     {-page_column ""}
-    {-state full}
+    {-state ""}
+    {-sort_key ""}
 } {
-    Make a copy of an existing element, including its parameters.
+    Make a copy of an existing element, including its parameters.  By default,
+    the element will be copied to the end of its current page and column with its
+    current name, title, theme, required_privilege and state.
 
     @param element_id The existing element to copy from.
-    @param page_name The name of the page to place the copy on.
+    @param name The name to give to the copy.
+    @param title The title to give to the copy.
+    @param theme The theme to give to the copy.
+    @param required_privilege The privilege on the base package required of the user.
+    @param page_id The id of the page to place the copy on.
     @param page_column The column in which to place the copy.
+    @param state The state to assign the copy.
+
     @return The element_id of the new copy of the element.
+
 } {
-    set page_id [layout::element::get_column_value -element_id $element_id -column page_id]
-
-    if { $page_column eq "" } {
-            set page_column [layout::element::choose_page_column -page_id $page_id]
-    }
-
     set new_element_id [db_nextval layout_seq]
 
     db_transaction {
-        db_dml copy_element {}
-        db_dml copy_element_parameters {}
+        db_dml clone_element {}
+        db_dml clone_element_parameters {}
     }
 
     return $new_element_id

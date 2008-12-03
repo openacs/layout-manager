@@ -49,6 +49,45 @@ ad_proc layout::page::delete {
     layout::page::flush -page_id $page_id
 }
 
+ad_proc layout::page::clone {
+    -page_id:required
+    {-pageset_id ""}
+    {-name ""}
+    {-page_template ""}
+    {-theme ""}
+    {-sort_key ""}
+} {
+    Create a clone of an existing page and the elements it contains.  By default
+    the new page will be appended to the existing page's pageset.
+
+    @param page_id The id of the page to clone.
+    @param pageset_id The id of the pageset to place the cloned page in.
+    @param name The page name (used for navigation).
+    @param page_template The page template to use to render this page.
+    @param sort_key Where in the page order to put the page.
+} {
+    set new_page_id [db_nextval layout_seq]
+    db_transaction {
+        db_dml insert_page {}
+        foreach element_id [layout::page::get_elements -page_id $page_id] {
+            layout::element::clone -element_id $element_id -page_id $new_page_id
+        }
+    }
+    layout::pageset::flush -pageset_id $pageset_id
+    return $page_id
+}
+
+ad_proc -private layout::page::get_elements {
+    -page_id:required
+} {
+    Return the elements bound to this page.
+
+    @param page_id The id of the page
+    @return A list of element_ids bound to the page
+} {
+    return [db_list -cache_key page_${page_id}_get_elements get_elements {}]
+}
+
 ad_proc -private layout::page::get {
     -page_id:required
 } {
@@ -179,6 +218,27 @@ ad_proc -private layout::page::get_render_data {
     }
 }
 
+ad_proc layout::page::adjust_element_columns {
+    -page_id:required
+    -columns:required
+} {
+    Adjust the elements on the page so that their column values are less than or equal
+    two the columns parameters.  Used when the number of columns on a page is changed.
+
+    @parame page_id The id of the page we're interested in.
+    @params columns The number of columns on the page.
+} {
+    foreach element_id [layout::page::get_elements -page_id $page_id] {
+        if { [layout::element::get_column_value -element_id $element_id -column page_column]
+             > $columns } {
+            layout::element::set_column_value \
+                -element_id $element_id \
+                -column page_column \
+                -value $columns
+        }
+    }
+}
+
 ad_proc -private layout::page::flush {
     -page_id:required
 } {
@@ -188,3 +248,4 @@ ad_proc -private layout::page::flush {
 } {
     db_flush_cache -cache_key_pattern page_${page_id}_*
 }
+

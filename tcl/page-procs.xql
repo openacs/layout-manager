@@ -40,6 +40,27 @@
     </querytext>
   </fullquery>
 
+  <fullquery name="layout::page::clone.insert_page">
+    <querytext>
+      insert into layout_pages
+        (page_id, name, pageset_id, page_template, theme, sort_key)
+      select :new_page_id, coalesce(:name, lp.name), coalesce(:pageset_id, pageset_id),
+        coalesce(:page_template, lp.page_template), coalesce(:theme, lp.theme),
+        coalesce(:sort_key, sort_key)
+      from layout_pages lp
+      where lp.page_id = :page_id
+    </querytext>
+  </fullquery>
+
+  <fullquery name="layout::page::get_elements.get_elements">
+    <querytext>
+      select element_id
+      from layout_elements
+      where page_id=:page_id
+      order by element_id
+    </querytext>
+  </fullquery>
+
   <fullquery name="layout::page::get.select_page">
     <querytext>
       select *

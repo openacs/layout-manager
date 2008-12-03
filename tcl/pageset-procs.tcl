@@ -18,6 +18,7 @@ ad_proc layout::pageset::new {
     {-owner_privileges {read write admin}}
     {-theme default}
     {-package_id ""}
+    {-template_id ""}
 } {
     Create a new page set for the passed in owner_id. create pages passed in
     the page_list.
@@ -50,7 +51,8 @@ ad_proc layout::pageset::new {
             {p_context_id $context_id}
             {p_owner_id $owner_id}
             {p_theme $theme}
-            {p_package_id $package_id}}]
+            {p_package_id $package_id}
+            {p_template_id $template_id}}]
 
         set pageset_id [package_instantiate_object -var_list $var_list layout_pageset]
 
@@ -69,6 +71,52 @@ ad_proc layout::pageset::new {
     return $pageset_id
 }
 
+ad_proc layout::pageset::clone {
+    -pageset_id:required
+    {-owner_id ""}
+    {-name ""}
+    {-theme ""}
+    {-package_id ""}
+    {-template_id ""}
+    {-owner_privileges {read write admin}}
+} {
+    Clone the given pageset.  By default all of the existing pageset attributes
+    will be copied into the new copy of the pageset.
+
+    @param pageset_id The id of the pageset to clone.
+    @param owner_id The optional owner of the new pageset.
+    @param name The optional name of the new pageset.
+    @param theme The optional theme name for the new pageset.
+    @param package_id The optional id of the package the new pageset will be mapped to.
+    @param owner_privilges List of privileges to assign to the owner of the new copy.
+} {
+    array set pageset [layout::pageset::get -pageset_id $pageset_id]
+    if { $owner_id eq "" } {
+        set owner_id $pageset(owner_id)
+    }
+    if { $name eq "" } {
+        set name $pageset(name)
+    }
+    if { $theme eq "" } {
+        set theme $pageset(theme)
+    }
+    if { $package_id eq "" } {
+        set package_id $pageset(package_id)
+    }
+    db_transaction {
+        set new_pageset_id [layout::pageset::new \
+                               -owner_id $owner_id \
+                               -name $name \
+                               -theme $theme \
+                               -package_id $package_id \
+                               -owner_privileges $owner_privileges]
+        foreach page_id [layout::pageset::get_pages -pageset_id $pageset_id] {
+            layout::page::clone -page_id $page_id -pageset_id $new_pageset_id
+        }
+    }
+    return $new_pageset_id
+}
+
 ad_proc layout::pageset::delete {
     -pageset_id:required
 } {
@@ -77,6 +125,14 @@ ad_proc layout::pageset::delete {
     db_dml delete_permissions {}
     db_exec_plsql delete_pageset {}
     layout::pageset::flush -pageset_id $pageset_id
+}
+
+ad_proc layout::pageset::get_pages {
+    -pageset_id:required
+} {
+    Return a list of page ids corresponding to the pages mapped to the given pageset.
+} {
+    return [db_list -cache_key pageset_${pageset_id}_get_pages get_pages {}]
 }
 
 ad_proc -private layout::pageset::get {
@@ -144,14 +200,11 @@ ad_proc layout::pageset::get_user_pageset_id {
 
         set master_template_id [layout::pageset::get_master_template_id -package_id $package_id]
 
-# DRB: this needs to be rewritten
-        set pageset_id [layout::pageset::new \
-            -owner_id $owner_id \
-            -name "Portal for $user_name" \
-            -template_id $master_template_id \
-            -context_id [ad_conn package_id] \
-            -initialize_elements]
-
+        set pageset_id [layout::pageset::clone \
+                           -pageset_id $master_template_id \
+                           -owner_id $owner_id \
+                           -name "Portal for $user_name" \
+                           -template_id $master_template_id]
     }
     return $pageset_id
 }

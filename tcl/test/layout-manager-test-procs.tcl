@@ -170,9 +170,9 @@ aa_register_case -cats {api smoke} elements {
                 set pageset_id [layout::pageset::new -package_id [ad_conn package_id] -owner_id 0]
                 set page_id [layout::page::new -pageset_id $pageset_id \
                                 -name test -page_template 2_column]
-                set element_id [layout::element::new -pageset_id $pageset_id \
+                set element_id [layout::element::new \
                                 -package_id [ad_conn package_id] \
-                                -page_name test -includelet_name subsites_includelet \
+                                -page_id $page_id -includelet_name subsites_includelet \
                                 -name test -title Test]
                 aa_true "Pass $i: new" [exists_and_not_null element_id]
 
@@ -221,9 +221,9 @@ aa_register_case -cats {api smoke} element_parameters {
                 set pageset_id [layout::pageset::new -package_id [ad_conn package_id] -owner_id 0]
                 set page_id [layout::page::new -pageset_id $pageset_id \
                                 -name test -page_template 2_column]
-                set element_id [layout::element::new -pageset_id $pageset_id \
+                set element_id [layout::element::new \
                                 -package_id [ad_conn package_id] \
-                                -page_name test -includelet_name subsites_includelet \
+                                -page_id $page_id -includelet_name subsites_includelet \
                                 -name test -title Test]
                 layout::element::parameter::add_values \
                     -element_id $element_id \

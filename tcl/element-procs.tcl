@@ -11,9 +11,8 @@ ad_library {
 namespace eval layout::element {}
 
 ad_proc layout::element::new {
-    -pageset_id:required
     -package_id:required
-    {-page_name ""}
+    {-page_id ""}
     {-page_column ""}
     {-state full}
     -includelet_name:required
@@ -25,9 +24,8 @@ ad_proc layout::element::new {
 } {
     Create a new layout manager element of type includelet_name on the given layout manager.
 
-    @param pageset_id The page set to add this element to.
     @param package_id The object this element is bound to.
-    @param page_name The name of the page to place it on (defaults to the first page.)
+    @param page_id The id of the page to place it on (defaults to first page).
     @param name The internal name for this element
     @param title The external name or message resource for this element
     @param page_column The page page_column to placer the element on.
@@ -44,10 +42,8 @@ ad_proc layout::element::new {
 
 } {
 
-    set page_id [layout::page::get_id -pageset_id $pageset_id -page_name $page_name]
-
     if { $page_column eq "" } {
-            set page_column [layout::element::choose_page_column -page_id $page_id]
+        set page_column [layout::element::choose_page_column -page_id $page_id]
     }
 
     array set includelet [layout::includelet::get -name $includelet_name]

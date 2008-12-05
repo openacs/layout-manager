@@ -18,7 +18,6 @@ ad_proc layout::pageset::new {
     {-owner_privileges {read write admin}}
     {-theme default}
     {-package_id ""}
-    {-template_id ""}
 } {
     Create a new page set for the passed in owner_id. create pages passed in
     the page_list.
@@ -51,8 +50,7 @@ ad_proc layout::pageset::new {
             {p_context_id $context_id}
             {p_owner_id $owner_id}
             {p_theme $theme}
-            {p_package_id $package_id}
-            {p_template_id $template_id}}]
+            {p_package_id $package_id}}]
 
         set pageset_id [package_instantiate_object -var_list $var_list layout_pageset]
 
@@ -240,7 +238,6 @@ ad_proc layout::pageset::get_master_template_id {
     @return The pageset_id of the master page set template.
 
 } {
-
     if { ![info exists package_id] } {
         set package_id [ad_conn package_id]
     }
@@ -252,6 +249,19 @@ ad_proc layout::pageset::get_master_template_id {
     }
 }
 
+ad_proc layout::pageset::is_master_template_p {
+    -pageset_id:required
+    -package_id
+} {
+    @return True if the given pageset_id is the master template for the given package_id.
+} {
+   if { ![info exists package_id] } {
+       set package_id [ad_conn package_id]
+    }
+
+    return [expr { $pageset_id ==
+                   [layout::pageset::get_master_template_id -package_id $package_id] }]
+}
 
 ad_proc -public layout::pageset::get_page_count {
     -pageset_id:required

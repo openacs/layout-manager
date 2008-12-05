@@ -13,6 +13,7 @@ ad_proc layout::page::new {
     -pageset_id:required
     -name:required
     {-page_template 2_column}
+    {-theme ""}
 } {
     Create a new page and associate it with the given page set.
 

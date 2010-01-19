@@ -5,7 +5,7 @@
 
   <fullquery name="layout_manager::install::after_upgrade.add_url_name_nn">
     <querytext>
-      alter table layout_pages modify column url_name not null
+      alter table layout_pages modify url_name not null
     </querytext>
   </fullquery>
 

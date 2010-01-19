@@ -56,3 +56,24 @@ ad_proc layout_manager::install::after_install {} {
             -template /packages/layout-manager/lib/themes/blank
     }
 }
+
+ad_proc -private layout_manager::install::after_upgrade {
+    {-from_version_name:required}
+    {-to_version_name:required}
+} {
+    After upgrade callback for acs-subsite.
+} {
+    apm_upgrade_logic \
+        -from_version_name $from_version_name \
+        -to_version_name $to_version_name \
+        -spec {
+            1.1.0d1 1.1.0d2 {
+                db_dml add_url_name {}
+                db_foreach get_pages {} {
+                    set url_name [util::name_to_path -name $name]
+                    db_dml update_url_name {}
+                }
+                db_dml add_url_name_nn {}
+            }
+        }
+}

@@ -10,8 +10,10 @@ create table layout_pages (
                                     constraint layout_pages_pk
                                     primary key,
     name                            text
-                                    default 'Untitled Page'
                                     constraint l_pages_name_nn
+                                    not null,
+    url_name                        text
+                                    constraint l_pages_url_name_nn
                                     not null,
     pageset_id                      integer
                                     constraint l_pages_pageset_id_fk
@@ -31,7 +33,9 @@ create table layout_pages (
                                     constraint l_pages_sort_key_nn
                                     not null,
     constraint l_pages_pageset_id_sort_key_un
-    unique (pageset_id, sort_key)
+    unique (pageset_id, sort_key),
+    constraint l_pages_pageset_id_name_un
+    unique (url_name, name, pageset_id)
 );
 
 create index layout_pages_page_idx on layout_pages (pageset_id, page_id);

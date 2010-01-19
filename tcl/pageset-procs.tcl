@@ -62,7 +62,8 @@ ad_proc layout::pageset::new {
             layout::page::new \
                 -pageset_id $pageset_id \
                 -name [lindex $page 0] \
-                -page_template [lindex $page 1]
+                -url_name [lindex $page 1] \
+                -page_template [lindex $page 2]
         }
     }
     db_flush_cache -cache_key_pattern pageset_id_${package_id}_${owner_id}*
@@ -429,7 +430,7 @@ ad_proc layout::pageset::initialized {
 
 ad_proc layout::pageset::initialize {
     -package_id
-    {-page_list {{{Page 1} 2_column}}}
+    {-page_list {{{Page 1} page-1 2_column}}}
 } {
     Initialize this instance of the page set package if we've not already done so.  This
     consists of creating the master template, which is assigned to party 0 and will be

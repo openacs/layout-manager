@@ -19,6 +19,18 @@
 
           <td align="left">
             <form method="post" action="@package_url@pageset-configure-2">
+              <strong>#layout-manager.Url_Name#:</strong>
+              <input type="hidden" name="return_url" value="@return_url@">
+              <input type="hidden" name="pageset_id" value="@pageset_id@">
+              <input type="hidden" name="page_id" value="@page_id@">
+              <input type="text" name="url_name" value="@page.url_name@">
+              <input type="hidden" name="op" value="update_url_name">
+              <input type=submit value="#layout-manager.Rename#">
+            </form>
+          </td>
+
+          <td align="left">
+            <form method="post" action="@package_url@pageset-configure-2">
               <strong>#layout-manager.Theme#:</strong>
               <input type="hidden" name="return_url" value="@return_url@">
               <input type="hidden" name="pageset_id" value="@pageset_id@">

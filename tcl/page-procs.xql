@@ -5,8 +5,8 @@
   <fullquery name="layout::page::new.insert_page">
     <querytext>
     insert into layout_pages
-      (page_id, name, pageset_id, page_template, theme, sort_key)
-    select :page_id, :name, :pageset_id, :page_template, :theme,
+      (page_id, name, url_name, pageset_id, page_template, theme, sort_key)
+    select :page_id, :name, :url_name, :pageset_id, :page_template, :theme,
       coalesce(max(sort_key) + 1, 0)
     from layout_pages
     where pageset_id = :pageset_id
@@ -73,6 +73,7 @@
     <querytext>
       update layout_pages
       set name = :name,
+        url_name = :url_name,
         pageset_id = :pageset_id,
         page_template = :page_template,
         sort_key = :sort_key,

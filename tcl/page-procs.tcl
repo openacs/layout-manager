@@ -12,16 +12,22 @@ namespace eval layout::page {}
 ad_proc layout::page::new {
     -pageset_id:required
     -name:required
+    {-url_name ""}
     {-page_template 2_column}
     {-theme ""}
 } {
     Create a new page and associate it with the given page set.
 
     @param pageset_id The id of the page set the new page will be bound to.
-    @param name The page name (used for navigation).
+    @param name The human-friendly page name.
+    @param url_name The page name to use for navigation.  If blank, it will be automatically
+           generated from the name.
     @param page_template The page template to use to render this page.
 } {
     set page_id [db_nextval layout_seq]
+    if { $url_name eq "" } {
+        set url_name [util::name_to_path -name $name]
+    }
     db_dml insert_page {}
     layout::pageset::flush -pageset_id $pageset_id
     return $page_id

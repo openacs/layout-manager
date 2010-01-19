@@ -12,7 +12,7 @@ namespace eval layout::element {}
 
 ad_proc layout::element::new {
     -package_id:required
-    {-page_id ""}
+    -page_id:required
     {-page_column ""}
     {-state full}
     -includelet_name:required

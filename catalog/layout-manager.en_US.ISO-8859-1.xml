@@ -20,5 +20,6 @@
   <msg key="Theme">Theme</msg>
   <msg key="uninitialized">The page set package hasn't been configured yet.</msg>
   <msg key="Update">Update</msg>
+  <msg key="Url_Name">Url Name</msg>
 
 </message_catalog>

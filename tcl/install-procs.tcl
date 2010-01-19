@@ -69,7 +69,7 @@ ad_proc -public install::xml::action::layout-page {
     set page_template [apm_attribute_value -default 2_column $node page-template]
 
     set cmd layout::page::new
-    foreach param {pageset_id name page_template} {
+    foreach param {pageset_id name url_name page_template} {
         lappend cmd -$param [set $param]
     }
     set page_id [eval $cmd]

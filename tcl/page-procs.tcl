@@ -26,7 +26,7 @@ ad_proc layout::page::new {
 } {
     set page_id [db_nextval layout_seq]
     if { $url_name eq "" } {
-        set url_name [util::name_to_path -name $name]
+        set url_name [util::name_to_path -name [lang::util::localize $name]]
     }
     db_dml insert_page {}
     layout::pageset::flush -pageset_id $pageset_id

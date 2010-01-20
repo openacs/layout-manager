@@ -70,7 +70,9 @@ ad_proc -private layout_manager::install::after_upgrade {
             1.1.0d1 1.1.0d2 {
                 db_dml add_url_name {}
                 db_foreach get_pages {} {
-                    set url_name [util::name_to_path -name $name]
+                    set url_name \
+                        [util::name_to_path \
+                            -name [lang::util::localize $name [lang::system::site_wide_locale]]]
                     db_dml update_url_name {}
                 }
                 db_dml add_url_name_nn {}

@@ -20,6 +20,8 @@ without providing an intermediate interface template.
 making it more difficult to customize the output, the template engine is unable to cache the
 compiled byte-code generated for dynamic HTML, which impacts efficiency.
 <li>Theming is only available for portals, not pages or elements.
+<li>Portal pages are referenced with URLs containing a page number variable, rather than
+a symbolic URL.
 </ul>
 By comparison, the <b>Layout Manager</b> package:
 <ul>
@@ -41,3 +43,4 @@ for an example.
 <li>Commonly used database queries and associated computations are cached, so performance
 should be better than new-portal's.
 <li>Theming can be applied to a set of pages, or individual pages and elements.
+<li>Pages are referenced with symbolic URLs.

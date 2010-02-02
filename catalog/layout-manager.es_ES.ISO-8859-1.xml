@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<message_catalog package_key="layout-manager" locale="es_ES" charset="ISO-8859-1">
+
+  <msg key="add_hidden">Añadir portlet</msg>
+  <msg key="add_page">Añadir una nueva página</msg>
+  <msg key="Configure">Configurar</msg>
+  <msg key="left_and_right_sidebar_layout_description">Columnas finas a izquierda y derecha</msg>
+  <msg key="left_sidebar_layout_description">Columna fina a la izquierda</msg>
+  <msg key="no_elements">No hay elementos en este página</msg>
+  <msg key="Page">Página</msg>
+  <msg key="pageset_theme">Tema para estas páginas</msg>
+  <msg key="Rename">Renombrar</msg>
+  <msg key="Revert">Revertir</msg>
+  <msg key="revert_layout">Volver a la disposición por defecto</msg>
+  <msg key="right_sidebar_layout_description">Columna fina a la derecha</msg>
+  <msg key="simple_1column_layout_description">Una columna</msg>
+  <msg key="simple_2column_layout_description">Dos columnas</msg>
+  <msg key="simple_3column_layout_description">Tres columnas</msg>
+  <msg key="Template">Plantilla</msg>
+  <msg key="Theme">Tema</msg>
+  <msg key="uninitialized">El paquete no ha sido configurado aún</msg>
+  <msg key="Update">Actualizar</msg>
+  <msg key="Url_Name">Nombre para la URL</msg>
+</message_catalog>

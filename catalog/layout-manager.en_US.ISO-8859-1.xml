@@ -1,25 +1,24 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <message_catalog package_key="layout-manager" locale="en_US" charset="ISO-8859-1">
 
-  <msg key="simple_1column_layout_description">One columns</msg>
-  <msg key="simple_2column_layout_description">Two columns</msg>
-  <msg key="simple_3column_layout_description">Three columns</msg>
-  <msg key="left_sidebar_layout_description">Left sidebar</msg>
-  <msg key="right_sidebar_layout_description">Right sidebar</msg>
-  <msg key="left_and_right_sidebar_layout_description">Left and right sidebars</msg>
   <msg key="add_hidden">Add hidden portlet</msg>
   <msg key="add_page">Add a new page</msg>
   <msg key="Configure">Configure</msg>
+  <msg key="left_and_right_sidebar_layout_description">Left and right sidebars</msg>
+  <msg key="left_sidebar_layout_description">Left sidebar</msg>
+  <msg key="no_elements">No elements on this page</msg>
   <msg key="Page">Page</msg>
   <msg key="pageset_theme">Page Set theme</msg>
   <msg key="Rename">Rename</msg>
   <msg key="Revert">Revert</msg>
   <msg key="revert_layout">Revert to the default layout</msg>
-  <msg key="no_elements">No elements on this page</msg>
+  <msg key="right_sidebar_layout_description">Right sidebar</msg>
+  <msg key="simple_1column_layout_description">One column</msg>
+  <msg key="simple_2column_layout_description">Two columns</msg>
+  <msg key="simple_3column_layout_description">Three columns</msg>
   <msg key="Template">Template</msg>
   <msg key="Theme">Theme</msg>
   <msg key="uninitialized">The page set package hasn't been configured yet.</msg>
   <msg key="Update">Update</msg>
   <msg key="Url_Name">Url Name</msg>
-
 </message_catalog>

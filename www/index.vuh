@@ -12,14 +12,14 @@ ad_page_contract {
 set package_id [layout::package_id]
 set pageset_id [layout::pageset::get_user_pageset_id -package_id $package_id]
 
-rp_form_put package_id $package_id
-rp_form_put pageset_id $pageset_id
+rp_form_update package_id $package_id
+rp_form_update pageset_id $pageset_id
 
 set url_name [string trim [ad_conn extra_url] "/"]
 
 if { [ad_conn extra_url] ne "" } {
     if { [db_0or1row -cache_key pageset_${pageset_id}_vuh_[ad_conn extra_url] get_page_id {}] } {
-        rp_form_put page_num $page_num
+        rp_form_update page_num $page_num
     } else {
         ns_returnnotfound
         ad_script_abort

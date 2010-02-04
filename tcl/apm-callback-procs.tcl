@@ -76,6 +76,8 @@ ad_proc -private layout_manager::install::after_upgrade {
                     db_dml update_url_name {}
                 }
                 db_dml add_url_name_nn {}
+                db_dml add_unique_constraint {}
+                db_dml add_unique_constraint_2 {}
             }
         }
 }

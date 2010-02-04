@@ -34,8 +34,10 @@ create table layout_pages (
                                     not null,
     constraint l_pages_pageset_id_sort_key_un
     unique (pageset_id, sort_key),
+    constraint l_pages_pageset_id_url_name_un
+    unique (url_name, pageset_id),
     constraint l_pages_pageset_id_name_un
-    unique (url_name, name, pageset_id)
+    unique (name, pageset_id)
 );
 
 create index layout_pages_page_idx on layout_pages (pageset_id, page_id);

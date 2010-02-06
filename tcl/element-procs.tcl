@@ -32,7 +32,7 @@ ad_proc layout::element::new {
     @param includelet_name The layout manager includelet name
     @param name The name of the element
     @param parameters Optional args to set in array get format
-    @param initialize If set, call the layout manager's default initializer
+    @param initialize If set, call the includelet's initializer
     @param theme Override page and pageset theme if set
 
     @return The element_id of the new portlet
@@ -77,19 +77,23 @@ ad_proc layout::element::new {
 
 ad_proc layout::element::delete {
     -element_id:required
+    -uninitialize:boolean
 } {
     Delete the given element.
 
     @param element_id The id of the parameter to be deleted.
+    @param uninitialize If true, call the includelet's uninitialize proc
 } {
     array set element [layout::element::get -element_id $element_id]
     set page_id $element(page_id)
 
-    set uninitializer [layout::includelet::get_column_value \
-                          -name $element(includelet_name) \
-                          -column uninitializer]
-    if { $uninitializer ne "" } {
-        $uninitializer $element_id
+    if { $uninitialize_p } {
+        set uninitializer [layout::includelet::get_column_value \
+                              -name $element(includelet_name) \
+                              -column uninitializer]
+        if { $uninitializer ne "" } {
+            $uninitializer $element_id
+        }
     }
 
     db_dml delete_element {}
@@ -127,7 +131,6 @@ ad_proc layout::element::set_values {
     -element:required
 } {
     Set the fields of a layout manager element.
-
     @param element The new value of the element in array get format (including the element_id).
 } {
     array set element_array $element
@@ -413,6 +416,12 @@ ad_proc layout::element::clone {
     @return The element_id of the new copy of the element.
 
 } {
+    if { $page_id eq "" } {
+        set page_id [layout::element::get_column_value \
+                        -element_id $element_id \
+                        -column page_id]
+    }
+ 
     set new_element_id [db_nextval layout_seq]
 
     db_transaction {
@@ -420,7 +429,28 @@ ad_proc layout::element::clone {
         db_dml clone_element_parameters {}
     }
 
+    layout::page::flush -page_id $page_id
+
     return $new_element_id
+}
+ad_proc layout::element::clone_p {
+    -element_id:required
+} {
+    Check to see if a layout element is a clone of another (defined as being bound
+    to the same package_id).  Since this is rarely called, and only in an admin UI
+    context, it's not cached.
+
+    @element_id The element we want to check
+    @return True (1) if the element is not a clone
+} {
+    set package_id [layout::element::get_column_value \
+                       -element_id $element_id \
+                       -column package_id]
+    set includelet_name [layout::element::get_column_value \
+                           -element_id $element_id \
+                           -column includelet_name]
+    db_1row clone_p {}
+    return [expr { $element_count > 1 }]
 }
 
 ad_proc layout::element::configure {

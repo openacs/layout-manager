@@ -54,6 +54,15 @@
         </querytext>
     </fullquery>
 
+    <fullquery name="layout::element::clone_p.clone_p">
+        <querytext>
+          select count(*) as element_count
+          from layout_elements
+          where package_id = :package_id
+            and includelet_name = :includelet_name
+        </querytext>
+    </fullquery>
+
     <fullquery name="layout::element::delete.delete_element">
         <querytext>
             delete

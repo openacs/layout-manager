@@ -12,8 +12,14 @@ namespace eval layout::page {}
 ad_proc layout::page::unique_name {
     -name:required
     -pageset_id:required
+    {-page_id -1}
 } {
-    Guarantee that name is unique
+    Guarantee that name is unique in the given pageset.
+
+    @param name Look for duplicates of this name
+    @param pageset_id In this pageset
+    @param page_id But ignore this page.  Default is a page_id that never exists
+           (use this when creating a new page).
 } {
     set try 2
     set original_name $name
@@ -27,8 +33,14 @@ ad_proc layout::page::unique_name {
 ad_proc layout::page::unique_url_name {
     -url_name:required
     -pageset_id:required
+    {-page_id -1}
 } {
-    Guarantee that url_name is unique
+    Guarantee that url_name is unique in the given pageset.
+
+    @param name Look for duplicates of this url_name
+    @param pageset_id In this pageset
+    @param page_id But ignore this page.  Default is a page_id that never exists
+           (use this when creating a new page).
 } {
     set try 2
     set original_name $url_name

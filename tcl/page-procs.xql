@@ -7,6 +7,8 @@
       select 1
       from layout_pages
       where name = :name
+        and pageset_id = :pageset_id
+        and page_id <> :page_id
     </querytext>
   </fullquery>
 
@@ -15,6 +17,8 @@
       select 1
       from layout_pages
       where url_name = :url_name
+        and pageset_id = :pageset_id
+        and page_id <> :page_id
     </querytext>
   </fullquery>
 

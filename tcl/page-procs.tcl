@@ -11,12 +11,14 @@ namespace eval layout::page {}
 
 ad_proc layout::page::unique_name {
     -name:required
+    -pageset_id:required
 } {
     Guarantee that name is unique
 } {
     set try 2
+    set original_name $name
     while { [db_0or1row try_name {}] } {
-        set name "${name}($try)"
+        set name "${original_name}($try)"
         incr try
     }
     return $name
@@ -24,12 +26,14 @@ ad_proc layout::page::unique_name {
 
 ad_proc layout::page::unique_url_name {
     -url_name:required
+    -pageset_id:required
 } {
     Guarantee that url_name is unique
 } {
     set try 2
+    set original_name $url_name
     while { [db_0or1row try_url_name {}] } {
-        set url_name "${url_name}($try)"
+        set url_name "${original_name}-$try"
         incr try
     }
     return $url_name
@@ -55,8 +59,8 @@ ad_proc layout::page::new {
         set url_name [util::name_to_path -name [lang::util::localize $name]]
     }
 
-    set name [layout::page::unique_name -name $name]
-    set url_name [layout::page::unique_url_name -url_name $url_name]
+    set name [layout::page::unique_name -pageset_id $pageset_id -name $name]
+    set url_name [layout::page::unique_url_name -pageset_id $pageset_id -url_name $url_name]
 
     db_dml insert_page {}
     layout::pageset::flush -pageset_id $pageset_id

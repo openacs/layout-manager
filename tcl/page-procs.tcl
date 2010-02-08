@@ -9,6 +9,32 @@ ad_library {
 
 namespace eval layout::page {}
 
+ad_proc layout::page::unique_name {
+    -name:required
+} {
+    Guarantee that name is unique
+} {
+    set try 2
+    while { [db_0or1row try_name {}] } {
+        set name "${name}($try)"
+        incr try
+    }
+    return $name
+}
+
+ad_proc layout::page::unique_url_name {
+    -url_name:required
+} {
+    Guarantee that url_name is unique
+} {
+    set try 2
+    while { [db_0or1row try_url_name {}] } {
+        set url_name "${url_name}($try)"
+        incr try
+    }
+    return $url_name
+}
+
 ad_proc layout::page::new {
     -pageset_id:required
     -name:required
@@ -28,6 +54,10 @@ ad_proc layout::page::new {
     if { $url_name eq "" } {
         set url_name [util::name_to_path -name [lang::util::localize $name]]
     }
+
+    set name [layout::page::unique_name -name $name]
+    set url_name [layout::page::unique_url_name -url_name $url_name]
+
     db_dml insert_page {}
     layout::pageset::flush -pageset_id $pageset_id
     return $page_id
@@ -49,6 +79,7 @@ ad_proc layout::page::delete {
         foreach page $page_list {
             foreach {update_page_id sort_key} $page {}
             db_dml update_page {}
+            layout::page::flush -page_id $update_page_id
         }
     }
 

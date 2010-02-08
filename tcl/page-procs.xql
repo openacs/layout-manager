@@ -2,6 +2,22 @@
 
 <queryset>
 
+  <fullquery name="layout::page::unique_name.try_name">
+    <querytext>
+      select 1
+      from layout_pages
+      where name = :name
+    </querytext>
+  </fullquery>
+
+  <fullquery name="layout::page::unique_url_name.try_url_name">
+    <querytext>
+      select 1
+      from layout_pages
+      where url_name = :url_name
+    </querytext>
+  </fullquery>
+
   <fullquery name="layout::page::new.insert_page">
     <querytext>
     insert into layout_pages

@@ -112,6 +112,7 @@ switch $op {
     }
 
     rename_page {
+        set name [layout::page::unique_name -name $name]
         layout::page::set_column_value -page_id $page_id -column name -value $name
     }
 
@@ -127,6 +128,7 @@ switch $op {
 
         regsub -all -nocase { } [string trim $url_name] {-} url_name
         regsub -all {[^[:alnum:]\-]} $url_name {} url_name
+        set url_name [layout::page::unique_name -url_name $url_name]
         layout::page::set_column_value -page_id $page_id -column url_name -value $url_name
     }
 

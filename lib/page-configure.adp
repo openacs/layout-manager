@@ -78,15 +78,13 @@
       <td colspan="3">
         <center>
           #layout-manager.no_elements#
-          <if @page.sort_key@ ne 0>
-            <form method="post" action="@package_url@pageset-configure-2">
-              <input type="hidden" name="return_url" value="@return_url@">
-              <input type="hidden" name="pageset_id" value="@pageset_id@">
-              <input type="hidden" name="page_id" value="@page_id@">
-              <input type="hidden" name="op" value="remove_page">
-              <input type="submit" value="Remove Empty Page">
-            </form>
-          </if>
+          <form method="post" action="@package_url@pageset-configure-2">
+            <input type="hidden" name="return_url" value="@return_url@">
+            <input type="hidden" name="pageset_id" value="@pageset_id@">
+            <input type="hidden" name="page_id" value="@page_id@">
+            <input type="hidden" name="op" value="remove_page">
+            <input type="submit" value="Remove Empty Page">
+          </form>
         </center>
       </td>
     </if>

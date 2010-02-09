@@ -8,7 +8,7 @@ ad_page_contract {
     pageset_id:naturalnum,notnull
 }
 
-permission::require_permission -object_id $pageset_id -privilege write
+permission::require_permission -object_id $pageset_id -privilege admin
 
 set title "[_ layout-manager.Configure]"
 set context [list $title]

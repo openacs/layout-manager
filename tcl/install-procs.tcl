@@ -65,11 +65,12 @@ ad_proc -public install::xml::action::layout-page {
     set id [apm_attribute_value -default "" $node id]
     set pageset_id [apm_attribute_value -default $pageset_id $node pageset-id]
     set name [apm_required_attribute_value $node name]
+    set url_name [apm_attribute_value -default "" $node url-name]
     set theme [apm_attribute_value -default "" $node theme]
     set page_template [apm_attribute_value -default 2_column $node page-template]
 
     set cmd layout::page::new
-    foreach param {pageset_id name url_name page_template} {
+    foreach param {pageset_id name url_name page_template theme} {
         lappend cmd -$param [set $param]
     }
     set page_id [eval $cmd]

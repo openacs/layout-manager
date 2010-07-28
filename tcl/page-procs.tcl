@@ -107,6 +107,7 @@ ad_proc layout::page::clone {
     -page_id:required
     {-pageset_id ""}
     {-name ""}
+    {-url_name ""}
     {-page_template ""}
     {-theme ""}
     {-sort_key ""}
@@ -116,7 +117,8 @@ ad_proc layout::page::clone {
 
     @param page_id The id of the page to clone.
     @param pageset_id The id of the pageset to place the cloned page in.
-    @param name The page name (used for navigation).
+    @param name The human-readable page name
+    @param url_name The page name used for navigation.
     @param page_template The page template to use to render this page.
     @param sort_key Where in the page order to put the page.
 } {

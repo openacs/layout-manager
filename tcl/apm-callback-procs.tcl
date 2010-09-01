@@ -42,6 +42,12 @@ ad_proc layout_manager::install::after_install {} {
             -columns 3 \
             -description #layout-manager.left_and_right_sidebar_layout_description# \
             -template /packages/layout-manager/lib/page-templates/simple 
+
+        layout::page_template::new \
+            -name thin_thick_thick \
+            -columns 3 \
+            -description #layout-manager.left_sidebar_plus_2column_layout_description# \
+            -template /packages/layout-manager/lib/page-templates/simple 
     
         # And some themes
     
@@ -79,5 +85,11 @@ ad_proc -private layout_manager::install::after_upgrade {
                 db_dml add_unique_constraint {}
                 db_dml add_unique_constraint_2 {}
             }
-        }
+            1.1.0d2 1.1.0d3 {
+                layout::page_template::new \
+                    -name thin_thick_thick \
+                    -columns 3 \
+                    -description #layout-manager.left_sidebar_plus_2column_layout_description# \
+                    -template /packages/layout-manager/lib/page-templates/simple 
+            }
 }

@@ -92,4 +92,5 @@ ad_proc -private layout_manager::install::after_upgrade {
                     -description #layout-manager.left_sidebar_plus_2column_layout_description# \
                     -template /packages/layout-manager/lib/page-templates/simple 
             }
+        }
 }

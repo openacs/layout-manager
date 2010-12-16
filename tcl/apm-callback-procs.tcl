@@ -48,7 +48,13 @@ ad_proc layout_manager::install::after_install {} {
             -columns 3 \
             -description #layout-manager.left_sidebar_plus_2column_layout_description# \
             -template /packages/layout-manager/lib/page-templates/simple 
-    
+
+        layout::page_template::new \
+            -name thick_thin \
+            -columns 2 \
+            -description #layout-manager.thick_thin_2column_layout_description# \
+            -template /packages/layout-manager/lib/page-templates/simple
+
         # And some themes
     
         layout::theme::new \
@@ -91,6 +97,13 @@ ad_proc -private layout_manager::install::after_upgrade {
                     -columns 3 \
                     -description #layout-manager.left_sidebar_plus_2column_layout_description# \
                     -template /packages/layout-manager/lib/page-templates/simple 
+            }
+            1.1.0d3 1.1.0d4 {
+                layout::page_template::new \
+                    -name thick_thin \
+                    -columns 2 \
+                    -description #layout-manager.thick_thin_2column_layout_description# \
+                    -template /packages/layout-manager/lib/page-templates/simple
             }
         }
 }

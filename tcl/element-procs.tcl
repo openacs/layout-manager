@@ -190,7 +190,7 @@ ad_proc layout::element::get_id {
     @param title If present, like name but on the title column
 } {
     set id_list [layout::element::get_id_list \
-                    -pageset_id $id \
+                    -pageset_id $pageset_id \
                     -includelet_name $includelet_name \
                     -name $name \
                     -title $title]

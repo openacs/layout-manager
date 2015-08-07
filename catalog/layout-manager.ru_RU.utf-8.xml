@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<message_catalog package_key="layout-manager" locale="ru_RU" charset="utf-8">
+
+  <msg key="add_hidden">Добавить скрытый портлет</msg>
+  <msg key="add_page">Добавить новую страницу</msg>
+  <msg key="Configure">Конфигурировать</msg>
+  <msg key="left_and_right_sidebar_layout_description">Левая и правая врезки</msg>
+  <msg key="left_sidebar_layout_description">Левая врезка</msg>
+  <msg key="left_sidebar_plus_2column_layout_description">Левая врезка плюс две колонки</msg>
+  <msg key="no_elements">Нет элементов на этой странице</msg>
+  <msg key="Page">Страница</msg>
+  <msg key="pageset_theme">тема Параметры страницы</msg>
+  <msg key="Rename">Переименовать</msg>
+  <msg key="Revert">Вернуться </msg>
+  <msg key="revert_layout">Вернуться к разбивке по умолчанию</msg>
+  <msg key="right_sidebar_layout_description">Правая врезка</msg>
+  <msg key="simple_1column_layout_description">Одна колонка</msg>
+  <msg key="simple_2column_layout_description">Две колонки</msg>
+  <msg key="simple_3column_layout_description">Три колонки</msg>
+  <msg key="Template">Шаблон</msg>
+  <msg key="Theme">Тема</msg>
+  <msg key="thick_thin_2column_layout_description">Толстый/тонкий, две колонки</msg>
+  <msg key="uninitialized">Пакет параметров страницы ещё не настроен.</msg>
+  <msg key="Update">Обновить</msg>
+  <msg key="Url_Name">Наименование URL</msg>
+</message_catalog>
